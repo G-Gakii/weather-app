@@ -1,27 +1,33 @@
-# WeatherApp1
+# Angular Weather App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.2.
+## 🌦️ Overview
 
-## Development server
+The Angular Weather App is a dynamic and responsive web application that provides real-time weather updates based on the user's geographical location. It leverages Angular for the frontend, RxJS for reactive programming, and the OpenWeatherMap API for weather data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## ✨ Features
 
-## Code scaffolding
+- **Current Weather**: Displays the current weather conditions based on user's location.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Geolocation**: Automatically detects user's location to fetch weather data.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Weather Icons**: Visual representation of weather conditions using Font Awesome icons.
 
-## Build
+## 📦 Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository:
 
-## Running unit tests
+   ```bash
+   git clone https://github.com/yourusername/angular-weather-app.git
+   cd angular-weather-app
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```
 
-## Running end-to-end tests
+2. Install dependencies:
+   npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Set up environment variables:
+   Create a src/environments/environment.ts file: the set
+   weatherApiKey: 'YOUR_WEATHER_API_KEY',
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+4. Run the application:
+   npm start

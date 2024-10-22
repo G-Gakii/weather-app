@@ -1,0 +1,40 @@
+<div
+  class="container bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white min-w-96 min-h-84 p-4 rounded-lg flex flex-col text-center"
+>
+  @if(data){
+
+  <img
+    class="mx-auto"
+    [ngSrc]="
+      'http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png'
+    "
+    width="84"
+    height="84"
+    priority
+    alt="weather"
+  />
+  <p class="text-4xl mb-2">
+    {{ data.main.temp - 273.15 | number : "1.2-2" }} &deg;C
+  </p>
+  <p class="text-base">
+    {{ data.weather[0].description }}
+  </p>
+  <p class="mb-2 text-2xl">{{ data.name }}</p>
+  <div class="flex justify-between">
+    <div class="humidity mr-6">
+      <p>
+        <span class="mr-2"><fa-icon [icon]="faDroplet"></fa-icon></span
+        >{{ data.main.humidity }}%
+      </p>
+      <p>humidity</p>
+    </div>
+    <div class="wind">
+      <p>
+        <span class="mr-2"><fa-icon [icon]="faWind"></fa-icon></span
+        >{{ data.wind.speed }}km/h
+      </p>
+      <p>wind speed</p>
+    </div>
+  </div>
+  }
+</div>
