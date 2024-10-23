@@ -11,22 +11,24 @@ export class WeatherService {
   longitude = signal(0);
 
   constructor(private http: HttpClient) {}
-  getlocation(): Promise<void> {
-    return new Promise((resolve, reject) => {
+
+  getLocation(): Observable<void> {
+    return new Observable((observer) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           this.latitude.set(latitude);
           this.longitude.set(longitude);
-          resolve();
+          observer.next();
+          observer.complete();
         },
-        (error) => reject(error)
+        (error) => observer.error(error)
       );
     });
   }
 
   getWeather(): Observable<any> {
-    return from(this.getlocation()).pipe(
+    return this.getLocation().pipe(
       switchMap(() => {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude()}&lon=${this.longitude()}&appid=${
           environment.apiKey
