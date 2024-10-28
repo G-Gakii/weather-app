@@ -2,24 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { from, Observable, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Weather } from '../interface/weather';
+import MyLocation from './myLocation';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  latitude = signal(0);
-  longitude = signal(0);
-
   constructor(private http: HttpClient) {}
 
-  getLocation(): Observable<void> {
+  getLocation(): Observable<MyLocation> {
     return new Observable((observer) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          this.latitude.set(latitude);
-          this.longitude.set(longitude);
-          observer.next();
+          let myLocation = new MyLocation(latitude, longitude);
+
+          observer.next(myLocation);
           observer.complete();
         },
         (error) => observer.error(error)
@@ -27,13 +26,12 @@ export class WeatherService {
     });
   }
 
-  getWeather(): Observable<any> {
+  getWeather(): Observable<Weather> {
     return this.getLocation().pipe(
-      switchMap(() => {
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${this.latitude()}&lon=${this.longitude()}&appid=${
-          environment.apiKey
-        }`;
-        return this.http.get(apiUrl);
+      switchMap((myLocation: MyLocation) => {
+        console.log('my location', myLocation);
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${myLocation.latitude}&lon=${myLocation.longitude}&appid=${environment.apiKey}`;
+        return this.http.get<Weather>(apiUrl);
       })
     );
   }

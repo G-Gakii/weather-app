@@ -16,9 +16,7 @@ export class CurrentweatherComponent implements OnInit {
   data: any;
   faWind = faWind;
   faDroplet = faDroplet;
-  constructor(private service: WeatherService) {
-    console.log(`1 ${service.latitude()}`);
-  }
+  constructor(private service: WeatherService) {}
   ngOnInit() {
     console.log('next');
 
